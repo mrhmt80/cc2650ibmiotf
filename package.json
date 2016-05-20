@@ -1,0 +1,24 @@
+{
+  "name": "cc2650ibmitof",
+  "version": "0.0.1",
+  "description": "node.js implementation connecting a TI CC2650 SensorTag to IBM IoT Foundation.",
+  "main": "cc2560ibmiotf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmvester/cc2650ibmitof.git"
+  },
+  "keywords": [
+    "sensortag",
+    "cc2650",
+    "ibmiotf"
+  ],
+  "author": "Mikael Vester",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pmvester/cc2650ibmitof/issues"
+  },
+  "homepage": "https://github.com/pmvester/cc2650ibmitof#readme"
+}
