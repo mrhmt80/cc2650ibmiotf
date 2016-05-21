@@ -12,14 +12,12 @@ var config = {
 };
 
 var payload = {
-  'd': {
-    'ambientTemperature': null,
-    'humidity': null,
-    'light': null,
-    'objectTemperature': null,
-    'pressure': null,
-    'temperature': null
-  }
+  'ambientTemperature': null,
+  'humidity': null,
+  'light': null,
+  'objectTemperature': null,
+  'pressure': null,
+  'temperature': null
 };
 
 var deviceClient = new Client.IotfDevice(config);
@@ -79,7 +77,7 @@ function measure(st) {
       console.log('readBarometricPressure');
       st.readBarometricPressure(function(error, pressure) {
         console.log('pressure: %d hPa', pressure);
-        payload.d.pressure = pressure;
+        payload.pressure = pressure;
         callback();
       });
     },
@@ -87,9 +85,9 @@ function measure(st) {
       console.log('readHumidity');
       st.readHumidity(function(error, temperature, humidity) {
         console.log('humidity: %d %', humidity);
-        payload.d.humidity = humidity;
+        payload.humidity = humidity;
         console.log('temperature: %d °C', temperature);
-        payload.d.temperature = temperature;
+        payload.temperature = temperature;
         callback();
       });
     },
@@ -97,9 +95,9 @@ function measure(st) {
       console.log('readIrTemperature');
       st.readIrTemperature(function(error, objectTemperature, ambientTemperature) {
         console.log('object temperature: %d °C', objectTemperature);
-        payload.d.objectTemperature = objectTemperature;
+        payload.objectTemperature = objectTemperature;
         console.log('ambient temperature: %d °C', ambientTemperature);
-        payload.d.ambientTemperature = ambientTemperature;
+        payload.ambientTemperature = ambientTemperature;
         callback();
       });
     },
@@ -107,7 +105,7 @@ function measure(st) {
       console.log('readLuxometer');
       st.readLuxometer(function(error, lux) {
         console.log('lux: %d', lux);
-        payload.d.light = lux;
+        payload.light = lux;
         callback();
       });
     },
