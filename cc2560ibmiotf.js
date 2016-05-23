@@ -3,11 +3,11 @@ var sensorTag = require('sensortag');
 var async = require('async');
 
 var config = {
-  'org': 'a5vgz2',
-  'id': 'k34CC2650',
-  'type': 'CC2650',
+  'org': 'a5vgz2',           // change this to your own org
+  'id': 'k34CC2650',         // change this to your own device id
+  'type': 'CC2650',          // change this to your own device type
   'auth-method': 'token',
-  'auth-token': '1221080932'
+  'auth-token': '1221080932' // change this to your own token
 };
 
 var payload = {
