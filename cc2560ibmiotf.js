@@ -3,12 +3,11 @@ var sensorTag = require('sensortag');
 var async = require('async');
 
 var config = {
-//  'org': 'zof8xp',
   'org': 'a5vgz2',
   'id': 'k34CC2650',
   'type': 'CC2650',
   'auth-method': 'token',
-  'auth-token': '6001113213'
+  'auth-token': '1221080932'
 };
 
 var payload = {
