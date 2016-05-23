@@ -111,6 +111,7 @@ function measure(st) {
     function(callback) {
       console.log('sending: ' + JSON.stringify(payload));
       deviceClient.publish('status','json', JSON.stringify(payload));
+      callback();
     },
     function(callback) {
       callback();
