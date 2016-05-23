@@ -8,6 +8,7 @@ Hardware:
   - 5V micro USB power supply
 
 Software:
+  - Raspian Jessie Lite (May 2016)
   - bluez 5.23
   - node 5.11.1
   - async 2.0.0-rc.5 (npm package)
