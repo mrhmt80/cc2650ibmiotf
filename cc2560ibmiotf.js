@@ -1,6 +1,6 @@
+var async = require('async');
 var Client = require('ibmiotf');
 var sensorTag = require('sensortag');
-var async = require('async');
 
 var config = {
   'org': 'a5vgz2',           // change this to your own org
@@ -16,7 +16,8 @@ var payload = {
   'light': null,
   'objectTemperature': null,
   'pressure': null,
-  'temperature': null
+  'temperature': null,
+  'time': null
 };
 
 var deviceClient = new Client.IotfDevice(config);
@@ -109,6 +110,7 @@ function measure(st) {
       });
     },
     function(callback) {
+      payload.time = Date.now();
       console.log('sending: ' + JSON.stringify(payload));
       deviceClient.publish('status','json', JSON.stringify(payload));
       callback();
