@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <script>
+
+      // onload callback
+      function drawChart() {
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://1eacafda-40c4-4ec3-bea0-2f5281f611f3-bluemix.cloudant.com/k34cc2650/_design/k34cc2650views/_view/all',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+          var dataPressure = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Light');
+          data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Humidity');
+          
+          dataPressure.addColumn('datetime', 'Time');
+          dataPressure.addColumn('number', 'Pressure');
+
+          $.each(results.rows, function (i, row) {
+            data.addRow([
+              (new Date(row.value.time)),
+              parseFloat(row.value.light),
+              parseFloat(row.value.temperature),
+              parseFloat(row.value.humidity)
+            ]);
+            dataPressure.addRow([
+              (new Date(row.value.time)),
+              parseFloat(row.value.pressure)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+          var chartPressure = new google.visualization.LineChart($('#chartPressure').get(0));
+
+          chart.draw(data, {
+            title: 'k34 climate',
+            curveType: 'function'
+          });
+          chartPressure.draw(dataPressure, {
+            title: 'k34 pressure',
+            curveType: 'function'
+          });
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+    </script>
+
+  </head>
+  <body>
+    <div id="chart" style="width: 100%;"></div>
+    <div id="chartPressure" style="width: 100%;"></div>
+  </body>
+</html>
