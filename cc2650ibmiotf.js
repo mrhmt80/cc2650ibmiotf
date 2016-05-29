@@ -110,7 +110,8 @@ function measure(st) {
       });
     },
     function(callback) {
-      payload.time = Date.now();
+      var n = new Date();
+      payload.time = n.getTime() + n.getTimezoneOffset() * 60000;
       console.log('sending: ' + JSON.stringify(payload));
       deviceClient.publish('status','json', JSON.stringify(payload));
       callback();
