@@ -11,8 +11,12 @@
       function drawChart() {
 
         // JSONP request
+        var now = new Date();
+        var tzOffset = now.getTimezoneOffset() * 60000; // convert tz offset from minutes to ms
+        var nowUtcMs = now.getTime() + tzOffset;
+        var startTime = nowUtcMs - 3 * 60 * 60 * 1000; // start 3 hrs back in time
         var jsonData = $.ajax({
-          url: 'https://1eacafda-40c4-4ec3-bea0-2f5281f611f3-bluemix.cloudant.com/k34cc2650/_design/k34cc2650views/_view/all',
+          url: 'https://1eacafda-40c4-4ec3-bea0-2f5281f611f3-bluemix.cloudant.com/k34cc2650/_design/k34cc2650views/_view/all?start_key=' + startTime,
           data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
@@ -30,13 +34,13 @@
 
           $.each(results.rows, function (i, row) {
             data.addRow([
-              (new Date(row.value.time)),
+              (new Date(row.value.time - tzOffset)),
               parseFloat(row.value.light),
               parseFloat(row.value.temperature),
               parseFloat(row.value.humidity)
             ]);
             dataPressure.addRow([
-              (new Date(row.value.time)),
+              (new Date(row.value.time - tzOffset)),
               parseFloat(row.value.pressure)
             ]);
           });
